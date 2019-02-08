@@ -139,7 +139,11 @@ def team_names
 end
 
 def player_numbers(team_name)
-  find_the_team(team_name)[:players].map{|player_name, stats| stats[:number]}
+  all_players = find_the_team(team_name)[:players]
+  
+  all_players.map do |player_name, stats| 
+        stats[:number]
+  end
 end
 
 def player_stats (name)
@@ -159,7 +163,9 @@ def players
 end
 
 def find_the_team(team_name)
-  teams.find {|team| team.fetch(:team_name) == team_name}
+  teams.find do |team| 
+    team.fetch(:team_name) == team_name
+  end 
 end
 
 def find_the_player(name)
@@ -167,5 +173,6 @@ def find_the_player(name)
 end
 
 def player_biggest_shoe_size
-  players.max_by{|player, stats| stats.fetch(:shoe)}[1]
+  x = players.max_by{|player, stats| stats.fetch(:shoe)}[1]
+  binding.pry
 end
